@@ -59,7 +59,7 @@ If using a project wide constants file, name constants in this file in all upper
 let STR_GITHUB_FAILURE = "Github login failed"
 ```
 
-Use descriptive names with camel case for classes, methods, variables, etc. Type names (classes, structures, enumerations and protocols) should be capitalized, while method names and variables should start with a lower case letter. Private variables or constant names should begin with an underscore.
+Use descriptive names with camel case for classes, methods, variables, etc. Type names (classes, structures, enumerations and protocols) should be capitalized, while method names and variables should start with a lower case letter. Private variables should begin with an underscore.
 
 **Preferred:**
 
@@ -75,8 +75,6 @@ class WidgetContainer {
 **Not Preferred:**
 
 ```swift
-let MAX_WIDGET_COUNT = 100
-
 class app_widgetContainer {
   var wBut: UIButton
   let wHeightPct = 0.85
