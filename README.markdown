@@ -17,6 +17,7 @@
 * [Comments](#comments)
   * [General Comments](#general-comments)
   * [HeaderDoc Comments](#headerdoc-comments)
+  * [Jazzy Documentation Generator](#jazzy-documentation-generator)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
   * [Protocol Conformance](#protocol-conformance)
@@ -348,6 +349,10 @@ static func courseArrayFromFirebasedata(firebaseData: AnyObject) -> [Widgets] {
 ```
 
 Markdown is supported in these comments and further information can be found online at [EricaSadun.com](http://ericasadun.com/2015/06/14/swift-header-documentation-in-xcode-7/) as well as [NSHipster.com](http://nshipster.com/swift-documentation/).
+
+### Jazzy Documentation Generator
+
+When code is commented with the HeaderDoc format, a command-line utility from Realm called Jazzy can be used to generate Apple style documentation in html format. Jazzy can be downloaded from their [GitHub Repo](https://github.com/realm/jazzy)
 
 ## Classes and Structures
 
