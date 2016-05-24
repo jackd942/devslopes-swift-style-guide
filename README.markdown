@@ -6,10 +6,8 @@
 * [Naming](#naming)
   * [Protocols](#protocols)
   * [Enumerations](#enumerations)
-  * [Prose](#prose)
   * [Selectors](#selectors)
   * [Generics](#generics)
-  * [Class Prefixes](#class-prefixes)
   * [Language](#language)
 * [Code Organization](#code-organization)
   * [Extensions](#extension)
@@ -17,6 +15,8 @@
   * [Minimal Imports](#minimal-imports)
 * [Spacing](#spacing)
 * [Comments](#comments)
+  * [General Comments](#general-comments)
+  * [HeaderDoc Comments](#headerdoc-comments)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
   * [Protocol Conformance](#protocol-conformance)
@@ -41,9 +41,6 @@
   * [Failing Guards](#failing-guards)
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
-* [Copyright Statement](#copyright-statement)
-* [Smiley Face](#smiley-face)
-* [Credits](#credits)
 
 
 ## Correctness
@@ -135,18 +132,6 @@ enum Shape {
   case equilateralTriangle
 }
 ```
-
-### Prose
-
-When referring to functions in prose (comments, etc) include the required parameter names from the caller's perspective or `_` for unnamed parameters. Examples:
-
-> Call `convertPointAt(column:row:)` from your own `init` implementation.
->
-> If you call `dateFromString(_:)` make sure that you provide a string with the format "yyyy-MM-dd".
->
-> If you call `timedAction(afterDelay:perform:)` from `viewDidLoad()` remember to provide an adjusted delay value and an action to perform.
->
-> You shouldn't call the data source method `tableView(_:cellForRowAtIndexPath:)` directly.
 
 ### Selectors
 
@@ -312,10 +297,59 @@ class TestDatabase : Database {
 
 ## Comments
 
+### General Comments
+
 When they are needed, use comments to explain **why** a particular piece of code does something. Comments must be kept up-to-date or deleted.
 
 Avoid block comments inline with code, as the code should be as self-documenting as possible. *Exception: This does not apply to those comments used to generate documentation.*
 
+### HeaderDoc Comments
+
+To generate documentation, the HeaderDoc format should be used. HeaderDoc comments offer a to both generate Apple style documentation as well as for quick help callouts, ie. *option->click*.
+
+HeaderDoc comments are either denoted with three slashes such as:
+
+```swift
+///
+/// Create array of widgets from Firebase Data
+///     
+/// - Parameter firebasebData: Firebase data to parse
+/// - Returns: courses: [Widgets]
+/// */
+static func courseArrayFromFirebasedata(firebaseData: AnyObject) -> [Widgets] {
+        let formatted = firebaseData as! Dictionary<String,AnyObject>
+        var widgets = [Widgets]()
+        for (key, widgetObj) in formatted {
+            let obj = widgetObj as! Dictionary<String, AnyObject>
+            let widget = Widget(widgetId: key, widgetData: obj)
+            widgets.append(widget)
+        }
+        return widgets
+    }
+```
+
+or in a block comment style with two asterisks at the beginning such as:
+
+```swift
+/**
+ Create array of widgets from Firebase Data
+     
+ - Parameter firebasebData: Firebase data to parse
+ - Returns: courses: [Widgets]
+*/
+static func courseArrayFromFirebasedata(firebaseData: AnyObject) -> [Widgets] {
+        let formatted = firebaseData as! Dictionary<String,AnyObject>
+        var widgets = [Widgets]()
+        for (key, widgetObj) in formatted {
+            let obj = widgetObj as! Dictionary<String, AnyObject>
+            let widget = Widget(widgetId: key, widgetData: obj)
+            widgets.append(widget)
+        }
+        return widgets
+    }
+```
+
+Markdown is supported in these comments and further information can be found online at [EricaSadun.com](http://ericasadun.com/2015/06/14/swift-header-documentation-in-xcode-7/) as well as [NSHipster.com](http://nshipster.com/swift-documentation/).
 
 ## Classes and Structures
 
@@ -455,6 +489,7 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 Use trailing closure syntax only if there's a single closure expression parameter at the end of the argument list. Give the closure parameters descriptive names.
 
 **Preferred:**
+
 ```swift
 UIView.animateWithDuration(1.0) {
   self.myView.alpha = 0
@@ -471,6 +506,7 @@ UIView.animateWithDuration(1.0,
 ```
 
 **Not Preferred:**
+
 ```swift
 UIView.animateWithDuration(1.0, animations: {
   self.myView.alpha = 0
